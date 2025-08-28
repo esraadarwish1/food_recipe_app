@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
     required this.title,
     this.textColor,
     required this.width,
+    this.hight,
     this.onTap,
     this.withIcon = false,
   });
@@ -17,6 +18,8 @@ class CustomButton extends StatelessWidget {
   final String title;
   final Color? textColor;
   final double width;
+  final double? hight;
+
   final void Function()? onTap;
   final bool withIcon;
   @override
@@ -25,7 +28,7 @@ class CustomButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        height: 60,
+        height: hight ?? 65,
         width: width,
         decoration: BoxDecoration(
           color: color ?? MyColors.myPrimary100,

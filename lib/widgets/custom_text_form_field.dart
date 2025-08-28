@@ -11,6 +11,10 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.hintColor,
     this.contentPadding,
+    this.readOnly = false,
+    this.onTap,
+    this.onChanged,
+     this.enabled=true,
   });
 
   final String textHint;
@@ -19,6 +23,10 @@ class CustomTextFormField extends StatelessWidget {
   final Icon? suffixIcon;
   final Color? hintColor;
   final EdgeInsetsGeometry? contentPadding;
+  final bool readOnly;
+  final VoidCallback? onTap;
+  final Function(String)? onChanged;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +38,18 @@ class CustomTextFormField extends StatelessWidget {
           SizedBox(height: 5),
         ],
         TextFormField(
+          enabled: enabled,
+          onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
+          onTap: onTap,
+          onChanged: onChanged ,
+          cursorColor: MyColors.myPrimary80,
+          readOnly: readOnly,
           autovalidateMode: AutovalidateMode.always,
           decoration: InputDecoration(
             hintText: textHint,
-            contentPadding: contentPadding??EdgeInsets.symmetric(vertical: 19,horizontal: 20),
+            contentPadding:
+                contentPadding ??
+                EdgeInsets.symmetric(vertical: 19, horizontal: 20),
             hintStyle: TextStyle(
               fontSize: 11,
               fontWeight: FontWeight.w400,
@@ -45,6 +61,10 @@ class CustomTextFormField extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: MyColors.myGray4),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: MyColors.myPrimary80),
             ),
           ),
         ),
